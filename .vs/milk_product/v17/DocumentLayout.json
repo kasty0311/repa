@@ -1,0 +1,168 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Tanya\\Desktop\\c#\\milk_product\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{E2105FAF-C631-499A-8DFB-F8C551CFBDF2}|milk_product\\milk_product.csproj|c:\\users\\tanya\\desktop\\c#\\milk_product\\milk_product\\forms\\ordersform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{E2105FAF-C631-499A-8DFB-F8C551CFBDF2}|milk_product\\milk_product.csproj|solutionrelative:milk_product\\forms\\ordersform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E2105FAF-C631-499A-8DFB-F8C551CFBDF2}|milk_product\\milk_product.csproj|c:\\users\\tanya\\desktop\\c#\\milk_product\\milk_product\\forms\\mainwindow.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{E2105FAF-C631-499A-8DFB-F8C551CFBDF2}|milk_product\\milk_product.csproj|solutionrelative:milk_product\\forms\\mainwindow.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E2105FAF-C631-499A-8DFB-F8C551CFBDF2}|milk_product\\milk_product.csproj|C:\\Users\\Tanya\\Desktop\\c#\\milk_product\\milk_product\\forms\\loginform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{E2105FAF-C631-499A-8DFB-F8C551CFBDF2}|milk_product\\milk_product.csproj|solutionrelative:milk_product\\forms\\loginform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E2105FAF-C631-499A-8DFB-F8C551CFBDF2}|milk_product\\milk_product.csproj|c:\\users\\tanya\\desktop\\c#\\milk_product\\milk_product\\forms\\captchaform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{E2105FAF-C631-499A-8DFB-F8C551CFBDF2}|milk_product\\milk_product.csproj|solutionrelative:milk_product\\forms\\captchaform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E2105FAF-C631-499A-8DFB-F8C551CFBDF2}|milk_product\\milk_product.csproj|c:\\users\\tanya\\desktop\\c#\\milk_product\\milk_product\\forms\\validationform .cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{E2105FAF-C631-499A-8DFB-F8C551CFBDF2}|milk_product\\milk_product.csproj|solutionrelative:milk_product\\forms\\validationform .cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E2105FAF-C631-499A-8DFB-F8C551CFBDF2}|milk_product\\milk_product.csproj|c:\\users\\tanya\\desktop\\c#\\milk_product\\milk_product\\forms\\validationform .cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E2105FAF-C631-499A-8DFB-F8C551CFBDF2}|milk_product\\milk_product.csproj|solutionrelative:milk_product\\forms\\validationform .cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E2105FAF-C631-499A-8DFB-F8C551CFBDF2}|milk_product\\milk_product.csproj|c:\\users\\tanya\\desktop\\c#\\milk_product\\milk_product\\forms\\mainwindow.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E2105FAF-C631-499A-8DFB-F8C551CFBDF2}|milk_product\\milk_product.csproj|solutionrelative:milk_product\\forms\\mainwindow.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E2105FAF-C631-499A-8DFB-F8C551CFBDF2}|milk_product\\milk_product.csproj|c:\\users\\tanya\\desktop\\c#\\milk_product\\milk_product\\forms\\ordersform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E2105FAF-C631-499A-8DFB-F8C551CFBDF2}|milk_product\\milk_product.csproj|solutionrelative:milk_product\\forms\\ordersform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E2105FAF-C631-499A-8DFB-F8C551CFBDF2}|milk_product\\milk_product.csproj|c:\\users\\tanya\\desktop\\c#\\milk_product\\milk_product\\forms\\loginform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E2105FAF-C631-499A-8DFB-F8C551CFBDF2}|milk_product\\milk_product.csproj|solutionrelative:milk_product\\forms\\loginform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 2,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "LoginForm.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
+              "DocumentMoniker": "C:\\Users\\Tanya\\Desktop\\c#\\milk_product\\milk_product\\Forms\\LoginForm.cs",
+              "RelativeDocumentMoniker": "milk_product\\Forms\\LoginForm.cs",
+              "ToolTip": "C:\\Users\\Tanya\\Desktop\\c#\\milk_product\\milk_product\\Forms\\LoginForm.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
+              "RelativeToolTip": "milk_product\\Forms\\LoginForm.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-14T07:43:22.076Z",
+              "EditorCaption": " [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "mainwindow.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
+              "DocumentMoniker": "C:\\Users\\Tanya\\Desktop\\c#\\milk_product\\milk_product\\Forms\\mainwindow.cs",
+              "RelativeDocumentMoniker": "milk_product\\Forms\\mainwindow.cs",
+              "ToolTip": "C:\\Users\\Tanya\\Desktop\\c#\\milk_product\\milk_product\\Forms\\mainwindow.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
+              "RelativeToolTip": "milk_product\\Forms\\mainwindow.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-14T13:39:36.02Z",
+              "EditorCaption": " [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "OrdersForm.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
+              "DocumentMoniker": "C:\\Users\\Tanya\\Desktop\\c#\\milk_product\\milk_product\\Forms\\OrdersForm.cs",
+              "RelativeDocumentMoniker": "milk_product\\Forms\\OrdersForm.cs",
+              "ToolTip": "C:\\Users\\Tanya\\Desktop\\c#\\milk_product\\milk_product\\Forms\\OrdersForm.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
+              "RelativeToolTip": "milk_product\\Forms\\OrdersForm.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-14T20:29:47.634Z",
+              "EditorCaption": " [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "CaptchaForm.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
+              "DocumentMoniker": "C:\\Users\\Tanya\\Desktop\\c#\\milk_product\\milk_product\\Forms\\CaptchaForm.cs",
+              "RelativeDocumentMoniker": "milk_product\\Forms\\CaptchaForm.cs",
+              "ToolTip": "C:\\Users\\Tanya\\Desktop\\c#\\milk_product\\milk_product\\Forms\\CaptchaForm.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
+              "RelativeToolTip": "milk_product\\Forms\\CaptchaForm.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-14T20:30:14.576Z",
+              "EditorCaption": " [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "ValidationForm .cs",
+              "DocumentMoniker": "C:\\Users\\Tanya\\Desktop\\c#\\milk_product\\milk_product\\Forms\\ValidationForm .cs",
+              "RelativeDocumentMoniker": "milk_product\\Forms\\ValidationForm .cs",
+              "ToolTip": "C:\\Users\\Tanya\\Desktop\\c#\\milk_product\\milk_product\\Forms\\ValidationForm .cs",
+              "RelativeToolTip": "milk_product\\Forms\\ValidationForm .cs",
+              "ViewState": "AgIAABIAAAAAAAAAAAAnwCwAAAA8AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-14T20:00:05.576Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ValidationForm .cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
+              "DocumentMoniker": "C:\\Users\\Tanya\\Desktop\\c#\\milk_product\\milk_product\\Forms\\ValidationForm .cs",
+              "RelativeDocumentMoniker": "milk_product\\Forms\\ValidationForm .cs",
+              "ToolTip": "C:\\Users\\Tanya\\Desktop\\c#\\milk_product\\milk_product\\Forms\\ValidationForm .cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
+              "RelativeToolTip": "milk_product\\Forms\\ValidationForm .cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-14T19:53:31.641Z",
+              "EditorCaption": " [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "mainwindow.cs",
+              "DocumentMoniker": "C:\\Users\\Tanya\\Desktop\\c#\\milk_product\\milk_product\\Forms\\mainwindow.cs",
+              "RelativeDocumentMoniker": "milk_product\\Forms\\mainwindow.cs",
+              "ToolTip": "C:\\Users\\Tanya\\Desktop\\c#\\milk_product\\milk_product\\Forms\\mainwindow.cs",
+              "RelativeToolTip": "milk_product\\Forms\\mainwindow.cs",
+              "ViewState": "AgIAAG8AAAAAAAAAAAAgwIgAAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-14T20:07:58.944Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "OrdersForm.cs",
+              "DocumentMoniker": "C:\\Users\\Tanya\\Desktop\\c#\\milk_product\\milk_product\\Forms\\OrdersForm.cs",
+              "RelativeDocumentMoniker": "milk_product\\Forms\\OrdersForm.cs",
+              "ToolTip": "C:\\Users\\Tanya\\Desktop\\c#\\milk_product\\milk_product\\Forms\\OrdersForm.cs",
+              "RelativeToolTip": "milk_product\\Forms\\OrdersForm.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAnwCEAAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-14T15:59:36.387Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "LoginForm.cs",
+              "DocumentMoniker": "C:\\Users\\Tanya\\Desktop\\c#\\milk_product\\milk_product\\Forms\\LoginForm.cs",
+              "RelativeDocumentMoniker": "milk_product\\Forms\\LoginForm.cs",
+              "ToolTip": "C:\\Users\\Tanya\\Desktop\\c#\\milk_product\\milk_product\\Forms\\LoginForm.cs",
+              "RelativeToolTip": "milk_product\\Forms\\LoginForm.cs",
+              "ViewState": "AgIAAC4AAAAAAAAAAAAAAEoAAAAvAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-14T07:49:52.686Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
