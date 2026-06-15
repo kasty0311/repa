@@ -1,0 +1,483 @@
+       dgvReport.DataSource =
+           db.Select(
+           @"SELECT DISTINCT
+     customers.name AS 'Поставщики',
+     COUNT(DISTINCT product.name)
+     AS 'Общее количество',
+     SUM(product.price * `order`.valueproduct)
+     AS 'Итого'
+     FROM `order`
+     JOIN product
+     ON product.id=`order`.product_id
+     JOIN customers
+     ON customers.id=`order`.salesman_id
+     GROUP BY customers.name");
+   }
+/log
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using MySql.Data.MySqlClient;
+
+namespace milk_product.Forms
+{
+    public partial class LoginForm : Form
+    {
+        public LoginForm()
+        {
+            InitializeComponent();
+        }
+        private string connStr = "server=localhost;user=root;password=Americantanya89);database=milk_product";
+        private void LoginButton_Click(object sender, EventArgs e)
+        {
+            //проверка на ввод с пустыми полями
+            if (LoginBox.Text == "" || PasswordBox.Text == "")
+            {
+                MessageBox.Show("Заполните все поля!", "Ошибка",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            using (MySqlConnection conn = new MySqlConnection(connStr)) //Создаём соединение с БД
+            {
+                conn.Open();//Открываем соединение
+                MySqlCommand cmd = new MySqlCommand(
+                    "SELECT Password, Captcha_attempts, Role FROM users WHERE Login=@login", conn); //Создаём SQL запрос
+                cmd.Parameters.AddWithValue("@login", LoginBox.Text); //Подставляем реальное значение вместо @login
+                MySqlDataReader reader = cmd.ExecuteReader();//результат
+                if (reader.Read()) //если пользователь найден
+                {
+                    int attempts = reader.GetInt32("Captcha_attempts"); //читаем количество попыток
+                    string role = reader.GetString("Role"); //читаем роль
+
+                    // блокировка если попыток >= 3
+                    if (attempts >= 3)
+                    {
+                        MessageBox.Show("Вы заблокированы. Обратитесь к администратору",
+                            "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+
+                    if (reader.GetString("Password") == PasswordBox.Text)
+                    {
+                        reader.Close();
+                        if (role == "user")
+                        {
+                            using (CaptchaForm captcha = new CaptchaForm(LoginBox.Text, attempts))
+                            {
+                                DialogResult result = captcha.ShowDialog();
+                                if (result == DialogResult.Abort)
+                                {
+                                    MessageBox.Show("Вы заблокированы. Обратитесь к администратору",
+                                        "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    return;
+                                }
+                                else if (result == DialogResult.OK)
+                                {
+                                    MessageBox.Show("Вы успешно авторизовались!", "Успех",
+             MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                    mainwindow main = new mainwindow();
+                                    main.Role = role;
+                                    main.Show();
+                                }
+                            }
+                      
+                        }
+                        else if (role == "admin")
+                        {
+                            MessageBox.Show("Вы успешно авторизовались!", "Успех",
+                                MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            mainwindow main = new mainwindow();
+                            main.Role = role;
+                            main.Show();
+                        }
+                    }
+                    else
+                    {
+                        reader.Close();
+                        MySqlCommand updateCmd = new MySqlCommand(
+                        // если пароль неверный — увеличиваем счётчик на 1 
+                        "UPDATE users SET Captcha_attempts = Captcha_attempts + 1 WHERE Login=@login", conn);
+                        updateCmd.Parameters.AddWithValue("@login", LoginBox.Text);
+                        updateCmd.ExecuteNonQuery();
+                        MessageBox.Show("Вы ввели неверный логин или пароль. Пожалуйста проверьте ещё раз введенные данные",
+                            "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Пользователя не существует!",
+                        "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+    }
+}
+/capcha
+using MySql.Data.MySqlClient;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace milk_product.Forms
+{
+    public partial class CaptchaForm : Form
+    {
+        private int _attempts;
+        private string _login;
+        private readonly List<PictureBox> _boxes = new List<PictureBox>();
+        private PictureBox _selected;
+        private string _basePath;
+        private string connStr = "server=localhost;user=root;password=Americantanya89);database=milk_product";
+
+        private class Piece
+        {
+            public Image Image { get; set; }
+            public string Id { get; set; }
+        }
+
+        private List<Piece> _pieces;
+
+        public CaptchaForm(string login, int attempts)
+        {
+            InitializeComponent();
+            _login = login;
+            _attempts = attempts;
+
+            _boxes.Add(pb1);
+            _boxes.Add(pb2);
+            _boxes.Add(pb3);
+            _boxes.Add(pb4);
+
+            foreach (var pb in _boxes)
+            {
+                pb.Click += Piece_Click;
+            }
+
+            _basePath = Path.Combine(Application.StartupPath, "Resources");
+            LoadImages();
+            Shuffle();
+        }
+
+        private void LoadImages()
+        {
+            _pieces = new List<Piece>
+            {
+                new Piece { Image = Image.FromFile(Path.Combine(_basePath, "1.png")), Id = "1" },
+                new Piece { Image = Image.FromFile(Path.Combine(_basePath, "2.png")), Id = "2" },
+                new Piece { Image = Image.FromFile(Path.Combine(_basePath, "3.png")), Id = "3" },
+                new Piece { Image = Image.FromFile(Path.Combine(_basePath, "4.png")), Id = "4" }
+            };
+        }
+
+        private void Shuffle()
+        {
+            Random rnd = new Random();
+            var shuffled = _pieces.OrderBy(_ => rnd.Next()).ToList();
+            for (int i = 0; i < _boxes.Count; i++)
+            {
+                _boxes[i].Image = shuffled[i].Image;
+                _boxes[i].Tag = shuffled[i].Id;
+            }
+        }
+
+        private void Piece_Click(object sender, EventArgs e)
+        {
+            var pb = (PictureBox)sender;
+
+            if (_selected == null)
+            {
+                _selected = pb;
+                pb.BorderStyle = BorderStyle.Fixed3D;
+                return;
+            }
+
+            if (pb == _selected)
+            {
+                pb.BorderStyle = BorderStyle.FixedSingle;
+                _selected = null;
+                return;
+            }
+
+            // меняем местами картинку и тег
+            var img = pb.Image;
+            var tag = pb.Tag;
+
+            pb.Image = _selected.Image;
+            pb.Tag = _selected.Tag;
+
+            _selected.Image = img;
+            _selected.Tag = tag;
+
+            _selected.BorderStyle = BorderStyle.None;
+            _selected = null;
+            pb.BorderStyle = BorderStyle.None;
+        }
+
+        private void btnCheck_Click(object sender, EventArgs e)
+        {
+            bool correct = true;
+            for (int i = 0; i < _boxes.Count; i++)
+            {
+                if (_boxes[i].Tag.ToString() != (i + 1).ToString())
+                {
+                    correct = false;
+                    break;
+                }
+            }
+
+            if (!correct)
+            {
+                using (MySqlConnection conn = new MySqlConnection(connStr))
+                {
+                    conn.Open();
+                    MySqlCommand cmd = new MySqlCommand(
+                        "UPDATE users SET Captcha_attempts = Captcha_attempts + 1 WHERE Login=@login", conn);
+                    cmd.Parameters.AddWithValue("@login", _login);
+                    cmd.ExecuteNonQuery();
+                }
+
+                _attempts++;
+
+                if (_attempts >= 3)
+                {
+                    DialogResult = DialogResult.Abort;
+                    Close();
+                    return;
+                }
+
+                MessageBox.Show($"Капча собран неверно. Осталось попыток: {3 - _attempts}",
+                    "Предупреждение", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            DialogResult = DialogResult.OK;
+            Close();
+        }
+    }
+}
+/mainw
+using MySql.Data.MySqlClient;
+using MySqlX.XDevAPI.Relational;
+using Newtonsoft.Json.Linq;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Net.Http;
+using System.Text;
+using System.Text.RegularExpressions;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace milk_product.Forms
+{
+    public partial class mainwindow : Form
+    {
+        // свойство для хранения роли пользователя
+        public string Role { get; set; }
+
+        // строка подключения к БД
+        string connStr = "server=localhost;user=root;password=Americantanya89);database=milk_product";
+
+        private HttpClient _httpClient;
+        public mainwindow()
+        {
+            InitializeComponent();
+        }
+
+        private void mainwindow_Load(object sender, EventArgs e)
+        {
+            _httpClient = new HttpClient();
+            _httpClient.BaseAddress = new Uri("http://localhost:4444/TransferSimulator/");
+            // если не админ — скрываем вкладку управления пользователями
+            if (Role != "admin")
+                tabControl1.TabPages.Remove(tabPage1);
+
+            // загружаем данные из БД в каждую таблицу
+            LoadData("SELECT * FROM users", dgvUsers);
+            LoadData("SELECT * FROM product", dgvProducts);
+            LoadData("SELECT * FROM materials", dgvMaterials);
+            LoadData("SELECT * FROM specification", dgvSpecification);
+            LoadData("SELECT * FROM orders", dgvOrders);
+            LoadData("SELECT * FROM customers", dgvCustomers);
+            if (Role != "admin")
+            {
+                dgvProducts.ReadOnly = true;
+                dgvMaterials.ReadOnly = true;
+                dgvSpecification.ReadOnly = true;
+                dgvOrders.ReadOnly = true;
+                dgvCustomers.ReadOnly = true;
+                btnSave.Visible = false;
+                btnDelete.Visible = false;
+            }
+        }
+
+        // метод загрузки данных в DataGridView
+        private void LoadData(string command, DataGridView grid)
+        {
+            using (MySqlConnection conn = new MySqlConnection(connStr))
+            {
+                MySqlDataAdapter adapter = new MySqlDataAdapter(command, conn);
+                MySqlCommandBuilder builder = new MySqlCommandBuilder(adapter);
+                DataTable dt = new DataTable();
+                adapter.Fill(dt);
+                grid.DataSource = dt;
+            }
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // получаем активную вкладку и берём из неё DataGridView
+                DataGridView grid = tabControl1.SelectedTab.Controls
+                    .OfType<DataGridView>().FirstOrDefault();
+
+                using (MySqlConnection conn = new MySqlConnection(connStr))
+                {
+                    conn.Open();
+                    string tableName = "";
+                    string tabText = tabControl1.SelectedTab.Text;
+
+                    if (tabText == "Управление пользователями") tableName = "users";
+                    else if (tabText == "Продукты") tableName = "product";
+                    else if (tabText == "Материалы") tableName = "materials";
+                    else if (tabText == "Спецификации") tableName = "specification";
+                    else if (tabText == "Заказы") tableName = "orders";
+                    else if (tabText == "Поставщики") tableName = "customers";
+
+                    MySqlDataAdapter adapter = new MySqlDataAdapter($"SELECT * FROM {tableName}", conn);
+                    MySqlCommandBuilder builder = new MySqlCommandBuilder(adapter);
+                    DataTable dt = grid.DataSource as DataTable;
+                    adapter.Update(dt);
+                    dt.AcceptChanges();
+                    MessageBox.Show("Данные сохранены!", "Успех",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            catch (MySqlException ex)
+            {
+                if (ex.Number == 1062)
+                    MessageBox.Show("Пользователь уже существует!", "Ошибка",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                else
+                    MessageBox.Show(ex.Message, "Ошибка",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // получаем активный DataGridView
+                DataGridView grid = tabControl1.SelectedTab.Controls
+                    .OfType<DataGridView>().FirstOrDefault();
+
+                // удаляем выделенные строки
+                foreach (DataGridViewRow row in grid.SelectedRows)
+                {
+                    grid.Rows.Remove(row);
+                }
+                MessageBox.Show("Строки удалены! Нажмите Сохранить для применения.",
+                    "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch
+            {
+                MessageBox.Show("Ошибка удаления!", "Ошибка",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            OrdersForm ordersForm = new OrdersForm();
+            ordersForm.ShowDialog();
+        }
+
+        private async void btnGetData_Click(object sender, EventArgs e)
+        {
+            var response = await _httpClient.GetAsync("fullName");
+
+            string json = await response.Content.ReadAsStringAsync();
+
+            JObject obj = JObject.Parse(json);
+
+            lblFIO.Text = obj["value"].ToString();
+        }
+
+        private void btnValidate_Click(object sender, EventArgs e)
+        {
+            string fio = lblFIO.Text;
+
+            if (Regex.IsMatch(fio, @"[^а-яА-ЯёЁ \-]"))
+                lblResult.Text = "ФИО содержит запрещенные символы";
+
+            else if (string.IsNullOrEmpty(fio))
+                lblResult.Text = "ФИО не может быть пустым";
+
+            else
+                lblResult.Text = "ФИО корректно";
+        }
+    }
+    
+}
+/order
+using MySql.Data.MySqlClient;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace milk_product.Forms
+{
+    public partial class OrdersForm : Form
+    {
+        string connStr = "server=localhost;user=root;password=Americantanya89);database=milk_product";
+
+        public OrdersForm()
+        {
+            InitializeComponent();
+        }
+
+        private void OrdersForm_Load(object sender, EventArgs e)
+        {
+            using (MySqlConnection conn = new MySqlConnection(connStr))
+            {
+                string query = "SELECT c.name AS Покупатель, " +
+    "SUM(ohp.quantity * m.quantity * m.price) AS Стоимость_заказа " +
+    "FROM orders o " +
+    "JOIN customers c ON o.Customers_id = c.id " +
+    "JOIN orders_has_product ohp ON o.Id = ohp.Orders_Id " +
+    "JOIN specification s ON ohp.Product_Id = s.Product_Id " +
+    "JOIN materials m ON s.Materials_Id = m.Id " +
+    "GROUP BY o.Id, c.name;";
+
+                MySqlDataAdapter adapter = new MySqlDataAdapter(query, conn);
+                DataTable dt = new DataTable();
+                adapter.Fill(dt);
+                dgvOrders.DataSource = dt;
+            }
+        }
+    }
+}
