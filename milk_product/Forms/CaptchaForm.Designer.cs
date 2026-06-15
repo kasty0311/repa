@@ -100,6 +100,7 @@
             this.Controls.Add(this.pb2);
             this.Controls.Add(this.pb1);
             this.Controls.Add(this.btnCheck1);
+            this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(484, 504);
             this.MinimumSize = new System.Drawing.Size(484, 504);
             this.Name = "CaptchaForm";

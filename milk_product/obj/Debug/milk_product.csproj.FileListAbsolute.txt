@@ -49,4 +49,3 @@ C:\Users\Tanya\Desktop\c#\milk_product\milk_product\obj\Debug\milk_product.Forms
 C:\Users\Tanya\Desktop\c#\milk_product\milk_product\obj\Debug\milk_product.Forms.OrdersForm.resources
 C:\Users\Tanya\Desktop\c#\milk_product\milk_product\bin\Debug\Newtonsoft.Json.dll
 C:\Users\Tanya\Desktop\c#\milk_product\milk_product\bin\Debug\Newtonsoft.Json.xml
-C:\Users\Tanya\Desktop\c#\milk_product\milk_product\obj\Debug\milk_product.Forms.ValidationForm.resources

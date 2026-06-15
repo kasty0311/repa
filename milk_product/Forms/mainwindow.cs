@@ -1,13 +1,17 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using MySqlX.XDevAPI.Relational;
+using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using MySql.Data.MySqlClient;
 
 namespace milk_product.Forms
 {
@@ -18,6 +22,8 @@ namespace milk_product.Forms
 
         // строка подключения к БД
         string connStr = "server=localhost;user=root;password=Americantanya89);database=milk_product";
+
+        private HttpClient _httpClient;
         public mainwindow()
         {
             InitializeComponent();
@@ -25,6 +31,8 @@ namespace milk_product.Forms
 
         private void mainwindow_Load(object sender, EventArgs e)
         {
+            _httpClient = new HttpClient();
+            _httpClient.BaseAddress = new Uri("http://localhost:4444/TransferSimulator/");
             // если не админ — скрываем вкладку управления пользователями
             if (Role != "admin")
                 tabControl1.TabPages.Remove(tabPage1);
@@ -131,10 +139,29 @@ namespace milk_product.Forms
             ordersForm.ShowDialog();
         }
 
-        private void tabControl1_Click(object sender, EventArgs e)
+        private async void btnGetData_Click(object sender, EventArgs e)
         {
-            ValidationForm validationForm = new ValidationForm();
-            validationForm.ShowDialog();
+            var response = await _httpClient.GetAsync("fullName");
+
+            string json = await response.Content.ReadAsStringAsync();
+
+            JObject obj = JObject.Parse(json);
+
+            lblFIO.Text = obj["value"].ToString();
+        }
+
+        private void btnValidate_Click(object sender, EventArgs e)
+        {
+            string fio = lblFIO.Text;
+
+            if (Regex.IsMatch(fio, @"[^а-яА-ЯёЁ \-]"))
+                lblResult.Text = "ФИО содержит запрещенные символы";
+
+            else if (string.IsNullOrEmpty(fio))
+                lblResult.Text = "ФИО не может быть пустым";
+
+            else
+                lblResult.Text = "ФИО корректно";
         }
     }
     
